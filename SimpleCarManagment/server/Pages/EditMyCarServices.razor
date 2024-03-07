@@ -1,0 +1,90 @@
+﻿@page "/edit-my-car-services/{Id}"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.EditMyCarServicesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Edit My Car Services</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@carservice" TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.CarService" Visible="@(carservice != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Cost" style="width: 100%" Text="Koszt">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(carservice.Cost)" Name="Cost">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Cost" style="position: absolute" Text="Cost is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Mileage" style="width: 100%" Text="Przebieg">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(carservice.Mileage)" Name="Mileage">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Mileage" style="position: absolute" Text="Mileage is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Date" style="width: 100%" Text="Data">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker DateFormat="dd.MM.yyyy" style="display: block; width: 100%" @bind-Value="@(carservice.Date)" Name="Date">
+                </RadzenDatePicker>
+                <RadzenRequiredValidator Component="Date" style="position: absolute" Text="Date is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="ServiceId" style="width: 100%" Text="Serwis">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getServicesResult" Placeholder="Choose Service" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(carservice.ServiceId)" ValueProperty="Id" Name="ServiceId">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="ServiceId" DefaultValue="0" style="position: absolute" Text="ServiceId is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Document" style="width: 100%" Text="Dokument">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenFileInput @bind-Value="@(carservice.Document)" Name="FileInput0" TValue="string">
+                </RadzenFileInput>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Zapisz">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Anuluj" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

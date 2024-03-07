@@ -1,0 +1,48 @@
+﻿@page "/maps"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.MapsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.JSInterop
+
+<PageTitle>Maps</PageTitle>
+<RadzenContent Container="main">
+    <div id="map-container">
+        <div id="map" style="height: 400px; width: 100%;"></div>
+    </div>
+    <!-- Pole tekstowe do wprowadzania frazy z automatycznym podpowiadaniem -->
+    <input id="place-input"
+           type="text"
+           placeholder="Wyszukaj najbliższy warsztat samochodowy" @bind="@SearchQuery" @bind:event="oninput"
+           style="color: black;"
+           onfocus="this.style.color = 'black';"
+           onblur="if (this.value === '') { this.style.color = 'gray'; }" />
+</RadzenContent>
+
+@code {
+    [Inject]
+    protected IJSRuntime JSRuntime { get; set; }
+
+    private string SearchQuery { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initMap");
+        }
+    }
+
+    public async Task SearchCarWorkshops(string query)
+    {
+        if (!string.IsNullOrEmpty(query))
+        {
+            await JSRuntime.InvokeVoidAsync("searchCarWorkshops", query);
+        }
+    }
+}

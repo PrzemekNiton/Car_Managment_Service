@@ -1,0 +1,126 @@
+﻿@page "/"
+@namespace SimpleCarManagment.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Radzen
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      SimpleCarManagment
+    </title>
+    <base href="~/" />
+    <link href="assets/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <app>@(await Html.RenderComponentAsync<App>(RenderMode.Server))</app>
+
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQucQSt6EraSr_qEfWNn9MWr1UZy8YvVM&libraries=places&callback=initMap" async defer></script>
+    <script>
+        var map;
+        var service;
+        var infowindow;
+        var userLocation;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 52.2297, lng: 21.0122 }, // Współrzędne Warszawy, Polska (punkt startowy)
+                zoom: 10, // Poziom przybliżenia
+            });
+
+            infowindow = new google.maps.InfoWindow();
+
+            // Pobierz lokalizację użytkownika (możesz to zrobić przy użyciu Geolocation API)
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    map.setCenter(userLocation); // Ustaw centrum mapy na lokalizację użytkownika
+                    findCarWorkshopsNearUser(userLocation); // Rozpocznij wyszukiwanie warsztatów w okolicy użytkownika
+                });
+            }
+
+            // Inicjalizacja pola wyszukiwania z automatycznym podpowiadaniem
+            var input = document.getElementById("place-input");
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            // Obsługa zdarzenia wyboru miejsca z podpowiedzi
+            autocomplete.addListener("place_changed", function () {
+                searchCarWorkshops();
+            });
+        }
+
+        function findCarWorkshopsNearUser(userLocation) {
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch(
+                {
+                    location: userLocation, // Lokalizacja użytkownika
+                    radius: 100000, // Promień 100 km (100000 metrów)
+                    type: ["car_repair"] // Typ miejsca - warsztat samochodowy
+                },
+                function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        // Wyczyść poprzednie markery
+                        clearMarkers();
+
+                        // Przetwarzaj wyniki wyszukiwania i twórz markery
+                        for (var i = 0; i < results.length; i++) {
+                            createMarker(results[i]);
+                        }
+                    }
+                }
+            );
+        }
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+            });
+
+            google.maps.event.addListener(marker, "click", function () {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+
+        function clearMarkers() {
+            // Funkcja do usuwania wszystkich markerów z mapy
+            // Implementację można dostosować do potrzeb
+        }
+
+        // Funkcja wywoływana po kliknięciu przycisku "Szukaj"
+        function searchCarWorkshops() {
+            var input = document.getElementById("place-input").value;
+            if (input) {
+                var request = {
+                    location: map.getCenter(), // Aktualne centrum mapy
+                    radius: 100000, // Promień 100 km (100000 metrów)
+                    query: input // Zapytanie użytkownika
+                };
+
+                service = new google.maps.places.PlacesService(map);
+                service.textSearch(request, function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        // Wyczyść poprzednie markery
+                        clearMarkers();
+
+                        // Przetwarzaj wyniki wyszukiwania i twórz markery
+                        for (var i = 0; i < results.length; i++) {
+                            createMarker(results[i]);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+    <component type="typeof(Microsoft.AspNetCore.Components.Web.HeadOutlet)" render-mode="ServerPrerendered" />
+</body>
+</html>

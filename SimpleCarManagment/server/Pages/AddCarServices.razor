@@ -1,0 +1,88 @@
+﻿@page "/add-car-services"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.AddCarServicesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Add Car Services</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@carservice" TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.CarService" Visible="@(carservice != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Cost" style="width: 100%" Text="Cost">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(carservice.Cost)" Name="Cost">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Cost" style="position: absolute" Text="Cost is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Date" style="width: 100%" Text="Date">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker style="display: block; width: 100%" @bind-Value="@(carservice.Date)" Name="Date">
+                </RadzenDatePicker>
+                <RadzenRequiredValidator Component="Date" style="position: absolute" Text="Date is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="ServiceId" style="width: 100%" Text="Service">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getServicesResult" Placeholder="Choose Service" style="display: block; width: 100%" TextProperty="Name" @bind-Value="@(carservice.ServiceId)" ValueProperty="Id" Name="ServiceId">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="ServiceId" DefaultValue="0" style="position: absolute" Text="ServiceId is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="CarId" style="width: 100%" Text="Car">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getCarsResult" Placeholder="Choose Car" style="width: 100%" TextProperty="CustomName" @bind-Value="@(carservice.CarId)" ValueProperty="Id" Name="CarId">
+                </RadzenDropDown>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Document" style="width: 100%" Text="Document">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="width: 100%" @bind-Value="@(carservice.Document)" Name="Document">
+                </RadzenTextBox>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

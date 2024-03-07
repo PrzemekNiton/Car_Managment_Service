@@ -1,0 +1,742 @@
+{
+  "info": {
+    "title": "SimpleCarManagmentDB",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15,
+    "x-infer-aspnet": false,
+    "x-infer-tables": true,
+    "x-infer-relations": true,
+    "x-infer-views": true,
+    "x-infer-sps": true
+  },
+  "definitions": {
+    "Car": {
+      "x-table": "dbo.Cars",
+      "resource": "Cars",
+      "required": [
+        "CustomName",
+        "Name",
+        "Image",
+        "Production",
+        "Vin",
+        "Mileage"
+      ],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Car",
+              "name": "CarServices",
+              "type": "CarService"
+            }
+          ]
+        },
+        "CustomName": {
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Name": {
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Image": {
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Production": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time",
+          "dbType": "datetime2",
+          "x-datetime": "datetime2"
+        },
+        "Vin": {
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Mileage": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double",
+          "dbType": "float"
+        },
+        "UserId": {
+          "x-default-sql": "(N'')",
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Registration": {
+          "x-default-sql": "(N'')",
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "CarServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CarService"
+          }
+        }
+      }
+    },
+    "CarService": {
+      "x-table": "dbo.CarServices",
+      "resource": "CarServices",
+      "required": [
+        "Cost",
+        "Date",
+        "ServiceId"
+      ],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int"
+        },
+        "Cost": {
+          "x-nullable": false,
+          "x-precision": 18,
+          "x-scale": 2,
+          "type": "number",
+          "format": "decimal",
+          "dbType": "decimal"
+        },
+        "Date": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time",
+          "dbType": "datetime2",
+          "x-datetime": "datetime2"
+        },
+        "Service": {
+          "type": "object",
+          "$ref": "#/definitions/Service"
+        },
+        "ServiceId": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int",
+          "x-foreignKey": {
+            "parentTable": "Services",
+            "parentEntityType": "Service",
+            "type": "Service",
+            "principalKey": "Id",
+            "name": "Service",
+            "textProperty": "Name",
+            "navigationProperty": "CarServices"
+          }
+        },
+        "Car": {
+          "type": "object",
+          "$ref": "#/definitions/Car"
+        },
+        "CarId": {
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int",
+          "x-foreignKey": {
+            "parentTable": "Cars",
+            "parentEntityType": "Car",
+            "type": "Car",
+            "principalKey": "Id",
+            "name": "Car",
+            "textProperty": "CustomName",
+            "navigationProperty": "CarServices"
+          }
+        },
+        "Document": {
+          "x-default-sql": "(N'')",
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Mileage": {
+          "x-default-sql": "((0.0000000000000000e+000))",
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double",
+          "dbType": "float"
+        }
+      }
+    },
+    "Service": {
+      "x-table": "dbo.Services",
+      "resource": "Services",
+      "required": [
+        "Name",
+        "Km",
+        "Years"
+      ],
+      "properties": {
+        "Id": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Service",
+              "name": "CarServices",
+              "type": "CarService"
+            }
+          ]
+        },
+        "Name": {
+          "x-nullable": false,
+          "type": "string",
+          "dbType": "nvarchar"
+        },
+        "Km": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double",
+          "dbType": "float"
+        },
+        "Years": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "dbType": "int"
+        },
+        "CarServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CarService"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Cars": {
+      "get": {
+        "operationId": "getCars",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Car"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCar",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Car",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CarServices": {
+      "get": {
+        "operationId": "getCarServices",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CarService"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCarService",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CarService",
+            "schema": {
+              "$ref": "#/definitions/CarService"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/CarService"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Services": {
+      "get": {
+        "operationId": "getServices",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Service"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createService",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Service",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Cars({Id})": {
+      "delete": {
+        "operationId": "deleteCar",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCarById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCar",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Car",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCarChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Car",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CarServices({Id})": {
+      "delete": {
+        "operationId": "deleteCarService",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCarServiceById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CarService"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCarService",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "CarService",
+            "schema": {
+              "$ref": "#/definitions/CarService"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCarServiceChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CarService",
+            "schema": {
+              "$ref": "#/definitions/CarService"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Services({Id})": {
+      "delete": {
+        "operationId": "deleteService",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getServiceById",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateService",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Id",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Service",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelServiceChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Service",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/SimpleCarManagmentDB",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

@@ -1,0 +1,114 @@
+﻿@page "/add-cars"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.AddCarsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Add Cars</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@car" TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Visible="@(car != null)" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="CustomName" style="width: 100%" Text="Nazwa własna">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(car.CustomName)" Name="CustomName">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="CustomName" style="position: absolute" Text="CustomName is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Name" style="width: 100%" Text="Nazwa">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(car.Name)" Name="Name">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Name" style="position: absolute" Text="Name is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Image" style="width: 100%" Text="Zdjęcie pojazdu">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenFileInput @bind-Value="@(car.Image)" Name="FileInput0" TValue="string">
+                </RadzenFileInput>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Production" style="width: 100%" Text="Data produkcji">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker style="display: block; width: 100%" @bind-Value="@(car.Production)" Name="Production">
+                </RadzenDatePicker>
+                <RadzenRequiredValidator Component="Production" style="position: absolute" Text="Production is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Vin" style="width: 100%" Text="Vin">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(car.Vin)" Name="Vin">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Vin" style="position: absolute" Text="Vin is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Vin" style="width: 100%" Text="User Id">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(car.UserId)" Name="User Id">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="User Id" style="position: absolute" Text="UserId is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Component="Mileage" style="width: 100%" Text="Przebieg">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(car.Mileage)" Name="Mileage">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="Mileage" style="position: absolute" Text="Mileage is required">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

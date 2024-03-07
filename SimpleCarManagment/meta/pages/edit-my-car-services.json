@@ -1,0 +1,383 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "components": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Cost",
+                              "name": "CostLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Koszt",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "Cost",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${carservice.Cost}",
+                              "valueType": "decimal"
+                            },
+                            {
+                              "component": "Cost",
+                              "name": "CostRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "Cost is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Mileage",
+                              "name": "label0",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Przebieg",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col0",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "Mileage",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "numeric",
+                              "value": "${carservice.Mileage}",
+                              "valueType": "double"
+                            },
+                            {
+                              "component": "Mileage",
+                              "name": "requiredValidator0",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "Mileage is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "name": "col1",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row0",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Date",
+                              "name": "DateLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Data",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "dateFormat": "dd.MM.yyyy",
+                              "name": "Date",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "type": "datepicker",
+                              "value": "${carservice.Date}",
+                              "valueType": "DateTime"
+                            },
+                            {
+                              "component": "Date",
+                              "name": "DateRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "Date is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "ServiceId",
+                              "name": "ServiceIdLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Serwis",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getServicesResult}",
+                              "name": "ServiceId",
+                              "placeholder": "Choose Service",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "textProperty": "Name",
+                              "type": "dropdown",
+                              "value": "${carservice.ServiceId}",
+                              "valueProperty": "Id",
+                              "valueType": "int"
+                            },
+                            {
+                              "component": "ServiceId",
+                              "defaultValue": "0",
+                              "name": "ServiceIdRequiredValidator",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "text": "ServiceId is required",
+                              "type": "required-validator"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "component": "Document",
+                              "name": "DocumentLabel",
+                              "style": {
+                                "width": "100%"
+                              },
+                              "text": "Dokument",
+                              "type": "label"
+                            }
+                          ],
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "name": "fileInput0",
+                              "type": "file-input",
+                              "value": "${carservice.Document}"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "type": "row"
+                    },
+                    {
+                      "components": [
+                        {
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "buttonStyle": "primary",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Zapisz",
+                              "type": "button"
+                            },
+                            {
+                              "buttonStyle": "light",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              },
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Anuluj",
+                              "type": "button"
+                            }
+                          ],
+                          "type": "col"
+                        }
+                      ],
+                      "type": "row"
+                    }
+                  ],
+                  "data": "${carservice}",
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update CarService",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "SimpleCarManagmentDB.updateCarService",
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${parameters.Id}"
+                          },
+                          {
+                            "name": "CarService",
+                            "value": "${carservice}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "condition": "",
+                            "result": "${carservice}",
+                            "type": "close-popup"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "SimpleCarManagment.Models.SimpleCarManagmentDb.CarService",
+                  "name": "form0",
+                  "type": "template-form",
+                  "visible": "${carservice != null}"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "error": [],
+        "name": "SimpleCarManagmentDB.getCarServiceById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.Id}"
+          }
+        ],
+        "then": [
+          {
+            "name": "carservice",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "SimpleCarManagment.Models.SimpleCarManagmentDb.CarService"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "SimpleCarManagmentDB.getServices",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getServicesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<SimpleCarManagment.Models.SimpleCarManagmentDb.Service>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "SimpleCarManagmentDB.getCars",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getCarsResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<SimpleCarManagment.Models.SimpleCarManagmentDb.Car>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Edit My Car Services"
+}

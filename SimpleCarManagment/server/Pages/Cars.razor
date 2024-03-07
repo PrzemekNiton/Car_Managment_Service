@@ -1,0 +1,56 @@
+﻿@page "/cars"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.CarsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles="Authenticated, Administrator")]
+<PageTitle>Cars</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="false" AllowSorting="true" Data="@getCarsResult" Density="Density.Compact" FilterMode="Radzen.FilterMode.Advanced" TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Id" Title="Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="CustomName" Title="Custom Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Image" Title="Image">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" FormatString="{0:d}" Property="Production" Title="Production">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Vin" Title="Vin">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Registration" Title="Registration">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Mileage" Title="Mileage">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="UserId" Title="User Id">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Medium" Click="@((args) =>GridDeleteButtonClick(args, simpleCarManagmentModelsSimpleCarManagmentDbCar))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="home_repair_service">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

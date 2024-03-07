@@ -1,0 +1,48 @@
+﻿@page "/diagram"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.DiagramComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Diagram</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div style="margin-bottom: 25px" class="row">
+      <div class="col-md-12 justify-content-end d-flex">
+        <RadzenNumeric style="right: 20px" @bind-Value="@year" Name="Numeric0">
+        </RadzenNumeric>
+        <RadzenButton Icon="done" style="background-color: #479cc8" Click="@Button0Click">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenChart ColorScheme="ColorScheme.Pastel">
+          <ChildContent>
+            <RadzenPieSeries CategoryProperty="Name" Data="@data" ValueProperty="Cost">
+              <TooltipTemplate Context="data">
+                <div class="row">
+                  <div class="col-md-12">
+                    <RadzenLabel Text="@($"{(data.Name)}")">
+                    </RadzenLabel>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <RadzenLabel Text="@($"{(data.Cost + " zł")}")">
+                    </RadzenLabel>
+                  </div>
+                </div>
+              </TooltipTemplate>
+            </RadzenPieSeries>
+          </ChildContent>
+        </RadzenChart>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

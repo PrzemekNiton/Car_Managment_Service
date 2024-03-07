@@ -1,0 +1,22 @@
+﻿@page "/open-ai/{carId}"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.OpenAiComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>OpenAI</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenDataGrid @ref="datagrid0" Data="@answer" TItem="SimpleCarManagment.Pages.ResponseAPI">
+      <Columns>
+        <RadzenDataGridColumn TItem="SimpleCarManagment.Pages.ResponseAPI" Property="Response" Title="Response">
+        </RadzenDataGridColumn>
+      </Columns>
+    </RadzenDataGrid>
+  </ChildContent>
+</RadzenContent>

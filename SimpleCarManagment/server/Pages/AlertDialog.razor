@@ -1,0 +1,36 @@
+﻿@page "/alert-dialog/{carId}"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.AlertDialogComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>AlertDialog</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div style="margin-bottom: 20px" class="row">
+      <div class="col-md-12  d-flex justify-content-between">
+        <RadzenLabel style="font-style: italic" Text="@($"{("Przebieg pojazdu: " + (car?.CarServices?.MaxBy(x => x.Mileage)?.Mileage ?? car.Mileage))}")">
+        </RadzenLabel>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenDataGrid @ref="datagrid0" Data="@alerts" TItem="SimpleCarManagment.Pages.AlertInfo">
+          <Columns>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Pages.AlertInfo" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Pages.AlertInfo" Property="Km" Title="Km">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Pages.AlertInfo" Property="Days" Title="Days">
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

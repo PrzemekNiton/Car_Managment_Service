@@ -1,0 +1,136 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12  d-flex justify-content-between",
+              "components": [
+                {
+                  "name": "label0",
+                  "style": {
+                    "fontStyle": "italic"
+                  },
+                  "text": "${\"Przebieg pojazdu: \" + car?.CarServices?.MaxBy(x => x.Mileage)?.Mileage}",
+                  "type": "label"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {
+            "marginBottom": "20px"
+          },
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "columns": [
+                    {
+                      "property": "Name",
+                      "title": "Name"
+                    },
+                    {
+                      "property": "Km",
+                      "title": "Km"
+                    },
+                    {
+                      "property": "Days",
+                      "title": "Days"
+                    }
+                  ],
+                  "data": "${alerts}",
+                  "itemType": "SimpleCarManagment.Pages.AlertInfo",
+                  "name": "datagrid0",
+                  "type": "datagrid"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row1",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "SimpleCarManagmentDB.getCars",
+        "parameters": [
+          {
+            "name": "$filter",
+            "value": [
+              {
+                "operation": "eq",
+                "property": "Id",
+                "type": "integer",
+                "value": "${parameters.carId}"
+              }
+            ]
+          },
+          {
+            "name": "$expand",
+            "value": "CarServices"
+          }
+        ],
+        "then": [
+          {
+            "name": "car",
+            "type": "set",
+            "value": "${result.FirstOrDefault()}",
+            "valueType": "SimpleCarManagment.Models.SimpleCarManagmentDb.Car"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "SimpleCarManagmentDB.getServices",
+        "parameters": [],
+        "then": [
+          {
+            "name": "services",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<SimpleCarManagment.Models.SimpleCarManagmentDb.Service>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "ReturnAlerts",
+        "schema": {
+          "dotnetType": "System.Collections.Generic.List<SimpleCarManagment.Pages.AlertInfo>",
+          "items": {
+            "$ref": "#/definitions/AlertInfo",
+            "dotnetType": "SimpleCarManagment.Pages.AlertInfo"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "alerts",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "List<SimpleCarManagment.Pages.AlertInfo>"
+          }
+        ],
+        "type": "invoke-method"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "AlertDialog"
+}

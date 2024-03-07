@@ -1,0 +1,12 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "layout": "Main",
+  "name": "Maps"
+}

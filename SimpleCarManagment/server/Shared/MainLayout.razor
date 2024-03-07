@@ -1,0 +1,85 @@
+﻿@inherits SimpleCarManagment.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using SimpleCarManagment.Pages
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenLayout>
+    <ChildContent>
+        <RadzenHeader>
+            <ChildContent>
+                <div class="row justify-content-start align-items-center">
+                    <div class="col-6 d-flex align-items-center">
+                        <RadzenSidebarToggle Click="@SidebarToggle0Click">
+                        </RadzenSidebarToggle>
+                        <img src="Car_vehicle_logo.png" alt="Car Management Logo" style="height: 50px; width: auto; margin-right: 10px;" />
+                        <RadzenLabel Text="CAR MANAGMENT APPLICATION">
+                        </RadzenLabel>
+                    </div>
+                    <div class="col-6 text-right">
+                        <RadzenProfileMenu Visible="@(Security.IsAuthenticated())" Click="@Profilemenu0Click">
+                            <ChildContent>
+                                <RadzenProfileMenuItem Icon="settings" Path="profile" Text="Mój profil" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+                                </RadzenProfileMenuItem>
+                                <RadzenProfileMenuItem Icon="power_settings_new" Path="login" Text="Wylogowanie" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+                                </RadzenProfileMenuItem>
+                            </ChildContent>
+                            <Template>
+                                <RadzenGravatar Email="@(Security.User?.Name)">
+                                </RadzenGravatar>
+                            </Template>
+                        </RadzenProfileMenu>
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenHeader>
+        <RadzenBody @ref="body0">
+            <ChildContent>
+                <RadzenContentContainer Name="main">
+                    @Body
+                </RadzenContentContainer>
+            </ChildContent>
+        </RadzenBody>
+        <RadzenSidebar @ref="sidebar0">
+            <ChildContent>
+                <RadzenPanelMenu style="height: 100%">
+                    <ChildContent>
+                        <RadzenPanelMenuItem Text="Administracyjne">
+                            <ChildContent>
+                                <RadzenPanelMenuItem Icon="people" Path="application-users" Text="Użytkownicy">
+                                </RadzenPanelMenuItem>
+                                <RadzenPanelMenuItem Icon="supervised_user_circle" Path="application-roles" Text="Role">
+                                </RadzenPanelMenuItem>
+                                <RadzenPanelMenuItem Icon="time_to_leave" Path="cars" Text="Samochody">
+                                </RadzenPanelMenuItem>
+                                <RadzenPanelMenuItem Icon="restore_page" Path="car-services" Text="Pozycje serwisów">
+                                </RadzenPanelMenuItem>
+                                <RadzenPanelMenuItem Icon="home_repair_service" Path="services" Text="Serwisy">
+                                </RadzenPanelMenuItem>
+                            </ChildContent>
+                        </RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Icon="commute" Path="my-cars" Text="Moje samochody" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+                        </RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Icon="leaderboard" Path="diagram" Text="Raport wydatków" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+                        </RadzenPanelMenuItem>
+                        <RadzenPanelMenuItem Icon="construction" Path="maps" Text="Wyszukaj warsztat na mapie" Visible="@Security.IsInRole(new string[]{"Authenticated"})">
+                        </RadzenPanelMenuItem>
+                    </ChildContent>
+                </RadzenPanelMenu>
+            </ChildContent>
+        </RadzenSidebar>
+        <RadzenFooter>
+            <ChildContent>
+                <RadzenLabel Text="Car Managment Application - Copyright Ⓒ 2024">
+                </RadzenLabel> 
+            </ChildContent>
+        </RadzenFooter>
+    </ChildContent>
+</RadzenLayout>

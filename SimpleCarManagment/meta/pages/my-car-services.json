@@ -1,0 +1,255 @@
+{
+  "access": [
+    "Authenticated",
+    "Administrator"
+  ],
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "left": "",
+                        "parameters": [
+                          {
+                            "name": "carId",
+                            "value": "${parameters.carId}"
+                          }
+                        ],
+                        "path": "add-my-car-services",
+                        "then": [
+                          {
+                            "code": "await grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "title": "Nowy serwis",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Dodaj",
+                  "type": "button"
+                },
+                {
+                  "allowFiltering": true,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "columns": [
+                    {
+                      "property": "Cost",
+                      "title": "Koszt"
+                    },
+                    {
+                      "formatString": "{0:d}",
+                      "property": "Date",
+                      "title": "Data"
+                    },
+                    {
+                      "filterProperty": "Service.Name",
+                      "groupProperty": "Service.Name",
+                      "property": "ServiceId",
+                      "sortProperty": "Service.Name",
+                      "template": "${data.Service?.Name}",
+                      "title": "Serwis"
+                    },
+                    {
+                      "format": "double",
+                      "property": "Mileage",
+                      "template": "",
+                      "title": "Przebieg",
+                      "type": "number"
+                    },
+                    {
+                      "filterTemplate": "",
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": "true"
+                            }
+                          ],
+                          "buttonStyle": "secondary",
+                          "events": {
+                            "click": [
+                              {
+                                "parameters": [
+                                  {
+                                    "name": "CarServiceId",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "path": "image-document",
+                                "title": "Grafika dokumentu",
+                                "type": "popup"
+                              }
+                            ]
+                          },
+                          "icon": "perm_media",
+                          "name": "button1",
+                          "size": "ButtonSize.Small",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "textAlign": "center",
+                      "width": "70px"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "template": [
+                        {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
+                          "buttonStyle": "danger",
+                          "events": {
+                            "click": [
+                              {
+                                "condition": "await DialogService.Confirm(\"Are you sure you want to delete this record?\") == true",
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete CarService",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "SimpleCarManagmentDB.deleteCarService",
+                                "parameters": [
+                                  {
+                                    "name": "Id",
+                                    "value": "${data.Id}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "await grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          },
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "size": "sm",
+                          "text": "",
+                          "type": "button"
+                        }
+                      ],
+                      "textAlign": "center",
+                      "width": "70px"
+                    }
+                  ],
+                  "data": "${getCarServicesResult}",
+                  "events": {
+                    "loadData": [],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "Id",
+                            "value": "${event.Id}"
+                          }
+                        ],
+                        "path": "edit-my-car-services",
+                        "then": [
+                          {
+                            "code": "await grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ],
+                        "title": "Edycja serwisu",
+                        "type": "popup"
+                      }
+                    ]
+                  },
+                  "filterMode": "advanced",
+                  "itemType": "SimpleCarManagment.Models.SimpleCarManagmentDb.CarService",
+                  "name": "grid0",
+                  "pageSize": 20,
+                  "title": "",
+                  "type": "datagrid"
+                }
+              ],
+              "type": "col"
+            }
+          ],
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "SimpleCarManagmentDB.getCarServices",
+        "parameters": [
+          {
+            "name": "$filter",
+            "operator": "and",
+            "value": [
+              {
+                "operation": "eq",
+                "property": "CarId",
+                "type": "integer",
+                "value": "${parameters.carId}"
+              }
+            ]
+          },
+          {
+            "name": "$orderby",
+            "value": [
+              {
+                "direction": "desc",
+                "property": "Date"
+              }
+            ]
+          }
+        ],
+        "then": [
+          {
+            "name": "getCarServicesResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<SimpleCarManagment.Models.SimpleCarManagmentDb.CarService>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "MyCarServices"
+}

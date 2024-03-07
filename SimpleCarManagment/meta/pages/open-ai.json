@@ -1,0 +1,68 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "columns": [
+            {
+              "property": "Response",
+              "title": "Response"
+            }
+          ],
+          "data": "${answer}",
+          "itemType": "SimpleCarManagment.Pages.ResponseAPI",
+          "name": "datagrid0",
+          "type": "datagrid"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "SimpleCarManagmentDB.getCarById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.carId}"
+          }
+        ],
+        "then": [
+          {
+            "name": "car",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "SimpleCarManagment.Models.SimpleCarManagmentDb.Car"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "GetOpenAI",
+        "schema": {
+          "async": true,
+          "dotnetType": "System.Threading.Tasks.Task<System.Collections.Generic.List<SimpleCarManagment.Pages.ResponseAPI>>",
+          "items": {
+            "$ref": "#/definitions/ResponseAPI",
+            "dotnetType": "SimpleCarManagment.Pages.ResponseAPI"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "answer",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "List<SimpleCarManagment.Pages.ResponseAPI>"
+          }
+        ],
+        "type": "invoke-method"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "OpenAI"
+}

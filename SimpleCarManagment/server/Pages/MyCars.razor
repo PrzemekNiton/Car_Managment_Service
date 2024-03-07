@@ -1,0 +1,69 @@
+﻿@page "/"
+@page "/my-cars"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.MyCarsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>MyCars</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Dodaj" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getCarsResult" FilterMode="Radzen.FilterMode.Advanced" TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" TextAlign="TextAlign.Center" Title="Zdjęcie">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenImage Path="@(simpleCarManagmentModelsSimpleCarManagmentDbCar.Image)" style="height: 80px">
+                </RadzenImage>
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="CustomName" Title="Nazwa własna">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Name" Title="Nazwa">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Mileage" Title="Przebieg">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenLabel Text="@($"{(Mileage(simpleCarManagmentModelsSimpleCarManagmentDbCar))}")">
+                </RadzenLabel>
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Property="Registration" Title="Rejestracja">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Filterable="false" Sortable="false" Title="Usuń" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Medium" Click="@((args) =>GridDeleteButtonClick(args, simpleCarManagmentModelsSimpleCarManagmentDbCar))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Filterable="false" Sortable="false" Title="Serwisy" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenButton ButtonStyle="ButtonStyle.Secondary" Icon="home_repair_service" Click="@((args) =>Button1Click(args, simpleCarManagmentModelsSimpleCarManagmentDbCar))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Title="Komunikaty" Width="90px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="report_problem" Visible="@(Alert(simpleCarManagmentModelsSimpleCarManagmentDbCar))" Click="@((args) =>Button2Click(args, simpleCarManagmentModelsSimpleCarManagmentDbCar))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Car" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Title="Zapytaj ChatGPT" Width="120px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbCar">
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="OpenAI" Click="@((args) =>Button3Click(args, simpleCarManagmentModelsSimpleCarManagmentDbCar))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

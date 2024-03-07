@@ -1,0 +1,174 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12 justify-content-end d-flex",
+              "components": [
+                {
+                  "name": "numeric0",
+                  "style": {
+                    "right": "20px"
+                  },
+                  "type": "numeric",
+                  "value": "${year}",
+                  "valueType": "int"
+                },
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "name": "GetData",
+                        "parameters": [
+                          {
+                            "name": "year",
+                            "type": "int",
+                            "value": "year"
+                          }
+                        ],
+                        "schema": {
+                          "async": true,
+                          "dotnetType": "System.Threading.Tasks.Task<System.Collections.Generic.List<SimpleCarManagment.Pages.DiagramData>>",
+                          "items": {
+                            "$ref": "#/definitions/DiagramData",
+                            "dotnetType": "SimpleCarManagment.Pages.DiagramData"
+                          },
+                          "type": "array"
+                        },
+                        "then": [
+                          {
+                            "name": "data",
+                            "type": "set",
+                            "value": "${result}",
+                            "valueType": "List<SimpleCarManagment.Pages.DiagramData>"
+                          }
+                        ],
+                        "type": "invoke-method"
+                      }
+                    ]
+                  },
+                  "icon": "done",
+                  "name": "button0",
+                  "style": {
+                    "backgroundColor": "#479cc8"
+                  },
+                  "text": "",
+                  "type": "button"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {
+            "marginBottom": "25px"
+          },
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "colorScheme": "ColorScheme.Pastel",
+                  "name": "chart1",
+                  "series": [
+                    {
+                      "categoryProperty": "Name",
+                      "data": "${data}",
+                      "type": "Pie",
+                      "valueProperty": "Cost"
+                    }
+                  ],
+                  "type": "chart",
+                  "visible": true
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row1",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "SimpleCarManagmentDB.getCars",
+        "parameters": [
+          {
+            "name": "$filter",
+            "operator": "and",
+            "value": [
+              {
+                "operation": "contains",
+                "property": "UserId",
+                "type": "string",
+                "value": "${Security.User.Id}"
+              }
+            ]
+          },
+          {
+            "name": "$expand",
+            "value": "CarServices"
+          }
+        ],
+        "then": [
+          {
+            "name": "cars",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<SimpleCarManagment.Models.SimpleCarManagmentDb.Car>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "year",
+        "type": "set",
+        "value": "DateTime.Now.Year",
+        "valueType": "int"
+      },
+      {
+        "name": "GetData",
+        "parameters": [
+          {
+            "name": "year",
+            "type": "int",
+            "value": "year"
+          }
+        ],
+        "schema": {
+          "async": true,
+          "dotnetType": "System.Threading.Tasks.Task<System.Collections.Generic.List<SimpleCarManagment.Pages.DiagramData>>",
+          "items": {
+            "$ref": "#/definitions/DiagramData",
+            "dotnetType": "SimpleCarManagment.Pages.DiagramData"
+          },
+          "type": "array"
+        },
+        "then": [
+          {
+            "name": "data",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "List<SimpleCarManagment.Pages.DiagramData>"
+          }
+        ],
+        "type": "invoke-method"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Diagram"
+}

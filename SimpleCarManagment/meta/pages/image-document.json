@@ -1,0 +1,56 @@
+{
+  "access": "Authenticated",
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12 justify-content-center d-flex",
+              "components": [
+                {
+                  "name": "image0",
+                  "path": "${service.Document}",
+                  "style": {
+                    "width": "80%"
+                  },
+                  "type": "image"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "SimpleCarManagmentDB.getCarServiceById",
+        "parameters": [
+          {
+            "name": "Id",
+            "value": "${parameters.CarServiceId}"
+          }
+        ],
+        "then": [
+          {
+            "name": "service",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "SimpleCarManagment.Models.SimpleCarManagmentDb.CarService"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "ImageDocument"
+}

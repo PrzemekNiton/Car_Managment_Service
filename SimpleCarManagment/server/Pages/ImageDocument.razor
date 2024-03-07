@@ -1,0 +1,22 @@
+﻿@page "/image-document/{CarServiceId}"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.ImageDocumentComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>ImageDocument</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12 justify-content-center d-flex">
+        <RadzenImage Path="@(service.Document)" style="width: 80%">
+        </RadzenImage>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,163 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SimpleCarManagment
+build_property.RootNamespace = SimpleCarManagment
+build_property.ProjectDir = C:\Users\Przemek\Desktop\CarProject\SimpleCarManagment\server\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Przemek\Desktop\CarProject\SimpleCarManagment\server
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddApplicationRole.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQXBwbGljYXRpb25Sb2xlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddApplicationUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQXBwbGljYXRpb25Vc2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddCars.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQ2Fycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddCarServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQ2FyU2VydmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddMyCars.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkTXlDYXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddMyCarServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkTXlDYXJTZXJ2aWNlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AddServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkU2VydmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/AlertDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWxlcnREaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/ApplicationRoles.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Sb2xlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/ApplicationUsers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXBwbGljYXRpb25Vc2Vycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Cars.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2Fycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/CarServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FyU2VydmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Diagram.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGlhZ3JhbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/EditApplicationUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdEFwcGxpY2F0aW9uVXNlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/EditCars.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdENhcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/EditCarServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdENhclNlcnZpY2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/EditMyCars.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdE15Q2Fycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/EditMyCarServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdE15Q2FyU2VydmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/EditServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFNlcnZpY2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/ImageDocument.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1hZ2VEb2N1bWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Maps.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWFwcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/MyCars.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlDYXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/MyCarServices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlDYXJTZXJ2aWNlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/OpenAi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3BlbkFpLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/RegisterApplicationUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXJBcHBsaWNhdGlvblVzZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Services.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VydmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/Unauthorized.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVW5hdXRob3JpemVkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Shared/LoginLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Przemek/Desktop/CarProject/SimpleCarManagment/server/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

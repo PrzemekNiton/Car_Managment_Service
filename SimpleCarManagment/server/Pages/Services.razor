@@ -1,0 +1,38 @@
+﻿@page "/services"
+@layout MainLayout
+@inherits SimpleCarManagment.Pages.ServicesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using SimpleCarManagment.Models.SimpleCarManagmentDb
+@using Microsoft.AspNetCore.Identity;
+@using SimpleCarManagment.Models
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+<PageTitle>Services</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@getServicesResult" Density="Density.Compact" FilterMode="Radzen.FilterMode.Advanced" TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Service" PageSize="20" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Service" Property="Name" Title="Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Service" Property="Km" Title="Km">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Service" Property="Years" Title="Years">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="SimpleCarManagment.Models.SimpleCarManagmentDb.Service" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+              <Template Context="simpleCarManagmentModelsSimpleCarManagmentDbService">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Medium" Click="@((args) =>GridDeleteButtonClick(args, simpleCarManagmentModelsSimpleCarManagmentDbService))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
